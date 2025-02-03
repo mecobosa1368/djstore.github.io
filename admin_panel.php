@@ -1,11 +1,11 @@
 <?php
-// Hata raporlamasını aktif et
+
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 session_start();
 
-// Admin session kontrolü fonksiyonu
+
 function checkAdminSession() {
     foreach($_SESSION as $key => $value) {
         if(strpos($key, 'admin_') === 0 && isset($value['role']) && $value['role'] === 'admin') {
@@ -15,7 +15,7 @@ function checkAdminSession() {
     return false;
 }
 
-// Sadece admin kontrolü
+
 $adminSession = checkAdminSession();
 if (!$adminSession) {
     header('Location: nacstr.html');
@@ -488,7 +488,7 @@ th {
             <?php endwhile; ?>
         </div>
 
-        <!-- Ürün düzenleme modalı -->
+       
         <div id="editProductModal" class="modal">
             <div class="modal-content">
                 <span class="close" onclick="closeEditProductModal()">&times;</span>
