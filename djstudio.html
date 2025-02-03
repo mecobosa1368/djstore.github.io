@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Наем на Техника</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        body {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: #fff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .content-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            max-width: 1200px;
+            margin: 150px auto;
+            background: rgba(25, 25, 50, 0.9);
+            box-shadow: 0 10px 30px rgba(0, 255, 255, 0.3);
+            border-radius: 12px;
+            overflow: hidden;
+            padding: 30px;
+        }
+
+        .image-container {
+            flex: 1;
+            min-width: 350px;
+            text-align: center;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border: 4px solid #05ffe6;
+            border-radius: 12px;
+            box-shadow: 0 0 20px #05ffe6;
+        }
+
+        .image-container .caption {
+            margin-top: 10px;
+            font-size: 16px;
+            color: #05ffe6;
+            text-shadow: 0 0 10px #05ffe6;
+        }
+
+        .description-container {
+            flex: 2;
+            padding: 20px;
+        }
+
+        .description-container h2 {
+            color: #ff4d6d;
+            margin-bottom: 20px;
+            text-shadow: 0 0 15px #ff4d6d;
+        }
+
+        .description-container p {
+            line-height: 1.8;
+            margin-bottom: 20px;
+            color: #ccc;
+            font-size: 18px;
+        }
+
+        .description-container a {
+            color: #05ffe6;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s, text-shadow 0.3s;
+        }
+
+        .description-container a:hover {
+            color: #ff4d6d;
+            text-shadow: 0 0 10px #ff4d6d;
+        }
+        .logo img {
+    position: relative;
+    top: 2px; 
+    width: 300px; 
+    height: 40px; 
+    margin: 10px; 
+}
+        
+.neon-footer {
+    background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
+    color: #fff;
+    padding: 40px 20px;
+    font-size: 14px;
+    line-height: 1.6;
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
+}
+
+.footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-section {
+    flex: 1;
+    min-width: 250px;
+}
+
+.footer-section h4 {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: #05ffe6;
+    text-transform: uppercase;
+    text-shadow: 0 0 10px #05ffe6;
+}
+
+.footer-section p, .footer-section ul {
+    margin: 0;
+    padding: 0;
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section ul li {
+    margin-bottom: 10px;
+}
+
+.footer-section ul li a {
+    color: #aaa;
+    text-decoration: none;
+    transition: color 0.3s, text-shadow 0.3s;
+}
+
+.footer-section ul li a:hover {
+    color: #05ffe6;
+    text-shadow: 0 0 10px #05ffe6;
+}
+
+
+.social-icons {
+    display: flex;
+    gap: 15px;
+}
+
+.social-icons a {
+    color: #aaa;
+    font-size: 20px;
+    transition: color 0.3s, transform 0.3s;
+}
+
+.social-icons a:hover {
+    color: #05ffe6;
+    transform: scale(1.2);
+    text-shadow: 0 0 20px #05ffe6;
+}
+
+
+.newsletter-form {
+    display: flex;
+    gap: 10px;
+}
+
+.newsletter-form input {
+    flex: 1;
+    padding: 10px;
+    border: 2px solid #05ffe6;
+    border-radius: 5px;
+    background: transparent;
+    color: #fff;
+}
+
+.newsletter-form input::placeholder {
+    color: #aaa;
+}
+
+.newsletter-form button {
+    padding: 10px 20px;
+    border: none;
+    background: #05ffe6;
+    color: #111;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background 0.3s, transform 0.3s;
+}
+
+.newsletter-form button:hover {
+    background: #00cfcf;
+    transform: scale(1.1);
+}
+
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 20px;
+    color: #aaa;
+    font-size: 12px;
+}
+
+.footer-bottom p {
+    margin: 0;
+    text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
+}
+@media (max-width: 768px) {
+    .content-wrapper {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .image-container {
+        min-width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .image-container img {
+        width: 80%; 
+        height: auto;
+        margin: 0 auto; 
+    }
+
+    .description-container {
+        padding: 10px;
+    }
+
+    .description-container h2 {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+    .description-container p {
+        font-size: 14px; 
+        margin-bottom: 10px;
+    }
+
+    .logo img {
+        width: 200px;
+        height: auto;
+    }
+
+    .footer-container {
+        flex-direction: column;
+        align-items: center;
+        padding: 0 10px;
+    }
+
+    .footer-section {
+        text-align: center;
+        width: 100%;
+    }
+
+    .newsletter-form {
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+    }
+
+    .newsletter-form input,
+    .newsletter-form button {
+        width: 85%;
+    }
+
+    .newsletter-form button {
+        width: 95%;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <header>
+        <div class="container">
+            <div class="logo"><img src="backgr/DJ-Shop-Logo.png" alt="DJ Shop Logo"></div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Магазин</a></li>
+                    <li class="dropdown">
+                        <a href="#">Услуги</a>
+                        <ul class="dropdown-content">
+                            <li><a href="tehnika.html">Техника под наем</a></li>
+                            <li><a href="instalacii.html">Инсталации audio & light</a></li>
+                            <li><a href="producentsko.html">Продуцентско студио под наем</a></li>
+                            <li><a href="djstudio.html">DJ студио под наем</a></li>
+                            <li><a href="serviz.html">Сервиз</a></li>
+                            <li><a href="kursove_dj.html">Курсове за DJ</a></li>
+                            <li><a href="kursove_producirane.html">Курсове за продуциране</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Новини</a></li>
+                    <li><a href="contact.html">Контакти</a></li>
+                    <li>
+                        <i class="fas fa-shopping-cart cart-icon"></i>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="content-wrapper">
+        <div class="image-container">
+            <img src="bar/djstudio/dj-studio_at_dj_shop-d5b8a37a.webp" alt="DJ Equipment">
+        </div>
+        <div class="description-container">
+            <h2>DJ студио под наем</h2>
+            <p>DJ SHOP разполага с DJ студио, оборудвано с най-наложената DJ техника в индустрията от Pioneer DJ, Allen & Heath, Technics, PLAYdifferently, Native Instruments. Акустично третирано и изолирано, обзаведено със сценично осветление, сценична конструкция, DJ пулт, мека мебел и качествена про-аудио система, с цел максимална симулация на истински нощен клуб.</p>
+            <p>В студиото можете да запишете аудио или видео сет, подкаст, livestream на живо, да пробвате класически или най-нови модели техника, да тренирате DJ уменията си или просто да се позабавлявате с приятели и музика. Диджей техниката на пулта е по желание на клиента. DJ STUDIO е с опция за наемане на час, без ограничение на престоя, поради удълженото му работно време.</p>
+            
+        </div>
+    </div>
+    <footer class="neon-footer">
+        <div class="footer-container">
+            <!-- Hakkımızda -->
+            <div class="footer-section about">
+                <h4>За нас</h4>
+                <p>DJ Store прави разликата в света на музиката с професионално DJ оборудване, услуги и курсове..</p>
+                <p><i class="fas fa-map-marker-alt"></i> ul.gimnaziya V.LEVSKI 15</p>
+                <p><i class="fas fa-phone-alt"></i> +359 89 4248054</p>
+                <p><i class="fas fa-envelope"></i> syuleyman88ilker@gmail.com</p>
+            </div>
+            
+            <!-- Hızlı Bağlantılar -->
+            <div class="footer-section links">
+                <h4>Бързи връзки</h4>
+                <ul>
+                    <li><a href="#">Hачална страница</a></li>
+                    <li><a href="#">Продукти</a></li>
+                    <li><a href="#">Услуги</a></li>
+                    <ul class="dropdown-content">
+                        <li><a href="tehnika.html">Техника под наем</a></li>
+                        <li><a href="instalacii.html">Инсталации audio & light</a></li>
+                        <li><a href="producentsko.html">Продуцентско студио под наем</a></li>
+                        <li><a href="djstudio.html">DJ студио под наем</a></li>
+                        <li><a href="serviz.html">Сервиз</a></li>
+                        <li><a href="kursove_dj.html">Курсове за DJ</a></li>
+                        <li><a href="kursove_producirane.html">Курсове за продуциране</a></li>
+                    </ul>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="contact.html">Контакти</a></li>
+                </ul>
+            </div>
+    
+            <!-- Haber Bülteni -->
+            <div class="footer-section newsletter">
+                <h4>Присъединете се към нашия бюлетин</h4>
+                <p>Бъдете информирани за най-новите продукти и кампании!</p>
+                <form action="#" method="post" class="newsletter-form">
+                    <input type="email" placeholder="Въведете своя имейл адрес" required>
+                    <button type="submit">Абонирайте се</button>
+                </form>
+            </div>
+    
+            <!-- Sosyal Medya -->
+            <div class="footer-section social">
+                <h4>Следвайте ни</h4>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 DJ Store. Всички права запазени. | Дизайн: Екип на DJ Store</p>
+        </div>
+    </footer>
+    
+</body>
+</html>

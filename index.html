@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DJ STORE</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+</head>
+
+<body>
+    
+    <div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+     </div>
+    <header>
+        <div class="container">
+            <div class="logo"><img src="backgr/DJ-Shop-Logo.png" href="index.html" alt="DJ Shop Logo"></div>
+            <nav>
+                <ul>
+                    <li><a href="#">Магазин</a></li>
+                    <li class="dropdown">
+                        <a href="#">Услуги</a>
+                        <ul class="dropdown-content">
+                            <li><a href="tehnika.html">Техника под наем</a></li>
+                            <li><a href="instalacii.html">Инсталации audio & light</a></li>
+                            <li><a href="producentsko.html">Продуцентско студио под наем</a></li>
+                            <li><a href="djstudio.html">DJ студио под наем</a></li>
+                            <li><a href="serviz.html">Сервиз</a></li>
+                            <li><a href="kursove_dj.html">Курсове за DJ</a></li>
+                            <li><a href="kursove_producirane.html">Курсове за продуциране</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Новини</a></li>
+                    <li><a href="contact.html">Контакти</a></li>
+                    
+<div class="dropdown">
+    <i class="fas fa-user profile-icon"></i>
+    <div id="profile-menu" class="dropdown-content">
+        <a href="logout.php">Излез</a>
+        <a href="nacstr.html">Влез</a>
+    </div>
+</div>
+                    <li>
+                        
+<i class="fas fa-shopping-cart cart-icon"></i>
+                    </li>
+                </ul>
+            </nav>
+           
+        </div>
+        
+        
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Име на продукт..." onkeyup="searchProducts()" />
+        </div>
+    </header>
+    
+    <div class="slider">
+        <div class="list">
+            <div class="item">
+                <img src="slider/401453-vertical-dj-background-1920x1080-for-iphone-6.jpg" alt="">
+            </div>
+            <div class="item">
+                <img src="slider/wp1811488-martin-garrix-wallpapers.jpg" alt="">
+            </div>
+            <div class="item">
+                <img src="slider/DJ.webp" alt="">
+            </div>
+            <div class="item">
+                <img src="slider/Uslugi-producentsko-studio-pod-naem-86d1c16c.jpg" alt="">
+            </div>
+            <div class="item">
+                <img src="slider/StockCake-Outdoor DJ Setup_1736292811.jpg" alt="">
+            </div>
+        </div>
+        <div class="buttons">
+            <button id="prev"><</button>
+            <button id="next">></button>
+        </div>
+        <ul class="dots">
+            <li class="active"></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+    
+
+    
+
+    <main>
+        <div class="content">
+            <div class="cart" id="cart" style="display: none;">
+                <h2>Кошница</h2>
+                <div class="cart-items" id="cart-items"></div>
+                <div class="total" id="total">Общо: 0лв</div>
+                <button class="order-button" onclick="placeOrder()">Поръчай</button>
+            </div>
+            <div id="category-info" style="margin: 20px 0; font-size: 20px; font-weight: bold;"></div>
+            <h1>DJ техника</h1>
+            <div class="categories">
+                <div class="category" onclick="toggleProducts('mixers')">DJ миксери</div>
+                <div class="category" onclick="toggleProducts('players')">DJ плейъри</div>
+                <div class="category" onclick="toggleProducts('controllers')">DJ контролери</div>
+                <div class="category" onclick="toggleProducts('turntables')">DJ грамофони</div>
+                <div class="category" onclick="toggleProducts('effects')">DJ ефектори / семплери</div>
+                <div class="category" onclick="toggleProducts('headphones')">DJ слушалки</div>
+                <div class="category" onclick="toggleProducts('cases')">DJ кейсове, чанти и раници</div>
+                <div class="category" onclick="toggleProducts('stands')">DJ стойки</div>
+                <div class="category" onclick="toggleProducts('software')">DJ софтуер и интерфейси</div>
+                <div class="category" onclick="toggleProducts('cables')">DJ кабели</div>
+                <div class="category" onclick="toggleProducts('monitors')">Мониторни колони</div>
+                <div class="category" onclick="toggleProducts('production')">Музикално продуциране</div>
+                <div class="category" onclick="toggleProducts('usb')">USB Flash / SD Card памети</div>
+                <div class="category" onclick="toggleProducts('tables')">DJ маси - пултове</div>
+                <div class="category" onclick="toggleProducts('accessories')">Аксесоари / резервни части</dIv>
+                <div class="category" onclick="toggleProducts('hearing')">Защита на слуха</div>
+            </div>
+
+            
+            <h2 id="category-title" style="display: none;"></h2>
+            <div id="price-filter" style="display: none;">
+                <label for="max-price">Цена от 0 до: </label>
+                <input type="number" id="max-price" value="1000" min="0" step="10">
+                <button onclick="applyPriceFilter()">Търси</button>
+                <label for="sort-order">Сортирай: </label>
+                <select id="sort-order" onchange="applySortOrder()">
+                    <option value="asc">Евтин към скъп</option>
+                    <option value="desc">Скъп към евтин</option>
+                </select>
+            </div>
+            
+            <!-- Tüm ürün kategorileri için boş container'lar -->
+            <div class="products" id="mixers" style="display: none;"></div>
+            <div class="products" id="players" style="display: none;"></div>
+            <div class="products" id="controllers" style="display: none;"></div>
+            <div class="products" id="turntables" style="display: none;"></div>
+            <div class="products" id="effects" style="display: none;"></div>
+            <div class="products" id="headphones" style="display: none;"></div>
+            <div class="products" id="cases" style="display: none;"></div>
+            <div class="products" id="stands" style="display: none;"></div>
+            <div class="products" id="software" style="display: none;"></div>
+            <div class="products" id="cables" style="display: none;"></div>
+            <div class="products" id="monitors" style="display: none;"></div>
+            <div class="products" id="production" style="display: none;"></div>
+            <div class="products" id="usb" style="display: none;"></div>
+            <div class="products" id="tables" style="display: none;"></div>
+            <div class="products" id="accessories" style="display: none;"></div>
+            <div class="products" id="hearing" style="display: none;"></div>
+
+        </div>
+        <div id="random-products-container">
+            <h2>Случайни продукти</h2>
+            <div id="random-products" class="products"></div>
+            <div id="navigation-buttons">
+                <button id="prev-btn"><</button>
+                <button id="next-btn">></button>
+            </div>
+        </div>
+        
+    </main>
+    
+
+    <!-- ...existing code... -->
+<!-- ...existing code... -->
+<div id="productModal" class="modal" style="display: none;"> 
+    <div class="modal-content">
+        <span class="close-button" onclick="closeModal()">&times;</span>
+        <div class="modal-body">
+            <div class="modal-image">
+                <button class="nav-arrow left-arrow" onclick="prevImage()">&#10094;</button>
+                <img id="modalImage" src="" alt="" />
+                <button class="nav-arrow right-arrow" onclick="nextImage()">&#10095;</button>
+                <div class="small-images">
+                    <img id="smallImage1" src="" alt="" class="small-img" onclick="changeMainImage(this.src, 0)" />
+                    <img id="smallImage2" src="" alt="" class="small-img" onclick="changeMainImage(this.src, 1)" />
+                    <img id="smallImage3" src="" alt="" class="small-img" onclick="changeMainImage(this.src, 2)" />
+                </div>
+            </div>
+            <div class="modal-details">
+                <h2 id="modalTitle"></h2>
+                <p>Описание:</p> 
+                <p id="modalDescription"></p>
+                <h3 id="modalPrice"></h3>
+                <label for="quantity">Количество:</label> 
+                <div style="display: flex; align-items: center;">
+                    <button class="quantity-button" onclick="changeQuantity(-1)">-</button>
+                    <input type="number" id="quantity" value="1" min="1" style="width: 50px; text-align: center; margin: 0 5px;"> 
+                    <button class="quantity-button" onclick="changeQuantity(1)">+</button>
+                </div>
+                <button class="buy-button" onclick="addToCartFromModal()">Премести в кошница</button>
+            </div>
+        </div>
+        <h3 style="margin-top: 20px; color: white; border: 3px solid #05cff3; border-radius: 7px; text-align: center;">Случайни продукти</h3>
+        <div id="modal-random-products" class="products" style="margin-top: 10px; display: flex; flex-wrap: wrap; gap: 15px;"></div>
+        <div id="navigation-buttons" style="margin-top: 10px;">
+            <button id="prev-btn" onclick="updateModalDisplayedProducts('prev')"><</button>
+            <button id="next-btn" onclick="updateModalDisplayedProducts('next')">></button>
+        </div>
+    </div>
+</div>
+<!-- ...existing code... -->
+<!-- ...existing code... -->
+</div>
+<footer class="neon-footer">
+    <div class="footer-container">
+        
+        <div class="footer-section about">
+            <h4>За нас</h4>
+            <p>DJ Store прави разликата в света на музиката с професионално DJ оборудване, услуги и курсове..</p>
+            <p><i class="fas fa-map-marker-alt"></i> ul.gimnaziya V.LEVSKI 15</p>
+            <p><i class="fas fa-phone-alt"></i> +359 89 4248054</p>
+            <p><i class="fas fa-envelope"></i> syuleyman88ilker@gmail.com</p>
+        </div>
+        
+        
+        <div class="footer-section links">
+            <h4>Бързи връзки</h4>
+            <ul>
+                <li><a href="#">Hачална страница</a></li>
+                <li><a href="#">Продукти</a></li>
+                <li><a href="#">Услуги</а></li>
+                <ul class="dropdown-content">
+                    <li><a href="tehnika.html">Техника под наем</a></li>
+                    <li><a href="instalacii.html">Инсталации audio & light</a></li>
+                    <li><a href="producentsko.html">Продуцентско студио под наем</a></li>
+                    <li><a href="djstudio.html">DJ студио под наем</a></li>
+                    <li><a href="serviz.html">Сервиз</а></li>
+                    <li><a href="kursove_dj.html">Курсове за DJ</a></li>
+                    <li><a href="kursove_producirane.html">Курсове за продуциране</a></li>
+                </ul>
+                <li><a href="#">Blog</a></li>
+                <li><a href="contact.html">Контакти</a></li>
+            </ul>
+        </div>
+
+        
+        <div class="footer-section newsletter">
+            <h4>Присъединете се към нашия бюлетин</h4>
+            <p>Бъдете информирани за най-новите продукти и кампании!</p>
+            <form action="#" method="post" class="newsletter-form">
+                <input type="email" placeholder="Въведете своя имейл адрес" required>
+                <button type="submit">Абонирайте се</button>
+            </form>
+        </div>
+
+        
+        <div class="footer-section social">
+            <h4>Следвайте ни</h4>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>© 2025 DJ Store. Всички права запазени. | Дизайн: Екип на DJ Store</p>
+    </div>
+</footer>
+
+
+
+    <script src="script.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', loadProducts);
+
+    window.addEventListener('storage', function(e) {
+        if (e.key === 'products') {
+            loadProducts();
+        }
+    });
+
+    function loadProducts() {
+        fetch('get_products.php')
+            .then(response => response.json())
+            .then(products => {
+                const productsByCategory = products.reduce((acc, product) => {
+                    if (!acc[product.category]) {
+                        acc[product.category] = [];
+                    }
+                    acc[product.category].push(product);
+                    return acc;
+                }, {});
+                
+                Object.keys(productsByCategory).forEach(category => {
+                    const categorySection = document.getElementById(category);
+                    if (categorySection) {
+                        categorySection.innerHTML = productsByCategory[category]
+                            .map(product => `
+                                <div class="product" onclick="openModal('${product.name}', ${product.price}, '${product.image_path}', '${product.description}')">
+                                    <h2>${product.name}</h2>
+                                    <img src="${product.image_path}" alt="${product.name}">
+                                    <p>Цена: ${product.price}лв</p>
+                                    <button class="buy-button" onclick="event.stopPropagation(); openModal('${product.name}', ${product.price}, '${product.image_path}', '${product.description}')">Купи</button>
+                                </div>
+                            `).join('');
+                    }
+                });
+            })
+            .catch(error => console.error('Error loading products:', error));
+    }
+
+    // Ürünleri yenileme mesajını dinle
+    window.addEventListener('message', function(event) {
+        if (event.data === 'refreshProducts') {
+            loadProducts(); // Ürünleri yeniden yükle
+        }
+    });
+    
+    // ...existing code...
+    </script>
+</body>
+
+</html>

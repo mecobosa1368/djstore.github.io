@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Форма за контакт</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <style>
+        body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url(contact/771486081870.jpg);
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+    background-attachment: fixed; 
+}
+
+        .container {
+            display: flex;
+            align-items: stretch;
+            justify-content: center;
+            max-width: 1200px;
+            margin: 50px auto;
+            border: 3px solid #05cff3; 
+            border-radius: 15px;;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+        .image-section {
+            width: 60%;
+            background: url('contact/indir-_2_\ \(1\).jpg') no-repeat center center/cover;
+        }
+        .form-section {
+            width: 40%;
+            background: rgb(4, 20, 39);
+            padding: 20px;
+        }
+        .form-section h2 {
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: white;
+        }
+        .form-group input, .form-group textarea {
+            color: white;
+            width: 90%;
+            padding: 10px;
+            border: 3px solid #00e1ff;
+            border-radius: 10px;
+            background-color: rgba(12, 12, 12, 0.466); 
+            backdrop-filter: blur(5px);
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-group textarea {
+            resize: none;
+            height: 120px;
+        }
+
+.btn {
+  --border-color: linear-gradient(-45deg, #ffae00, #7e03aa, #00fffb);
+  --border-width: 0.125em;
+  --curve-size: 0.5em;
+  --blur: 30px;
+  --bg: #080312;
+  --color: #afffff;
+  color: var(--color);
+  cursor: pointer;
+  position: relative;
+  isolation: isolate;
+  display: inline-grid;
+  place-content: center;
+  padding: 0.5em 1.5em;
+  font-size: 17px;
+  border: 0;
+  text-transform: uppercase;
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.6);
+  clip-path: polygon(
+    0% var(--curve-size),
+    var(--curve-size) 0,
+     100% 0,
+    100% calc(100% - var(--curve-size)),
+     calc(100% - var(--curve-size)) 100%,
+    0 100%
+  );
+  transition: color 250ms;
+}
+
+.btn::after,
+.btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.btn::before {
+  background: var(--border-color);
+  background-size: 300% 300%;
+  animation: move-bg7234 5s ease infinite;
+  z-index: -2;
+}
+
+@keyframes move-bg7234 {
+  0% {
+    background-position: 31% 0%;
+  }
+
+  50% {
+    background-position: 70% 100%;
+  }
+
+  100% {
+    background-position: 31% 0%;
+  }
+}
+
+.btn::after {
+  background: var(--bg);
+  z-index: -1;
+  clip-path: polygon(
+     var(--border-width)
+      calc(var(--curve-size) + var(--border-width) * 0.5),
+    calc(var(--curve-size) + var(--border-width) * 0.5) var(--border-width),
+     calc(100% - var(--border-width)) var(--border-width),
+    calc(100% - var(--border-width))
+      calc(100% - calc(var(--curve-size) + var(--border-width) * 0.5)),
+      calc(100% - calc(var(--curve-size) + var(--border-width) * 0.5))
+      calc(100% - var(--border-width)),
+   var(--border-width) calc(100% - var(--border-width))
+  );
+  transition: clip-path 500ms;
+}
+
+.btn:where(:hover, :focus)::after {
+  clip-path: polygon(
+     calc(100% - var(--border-width))
+      calc(100% - calc(var(--curve-size) + var(--border-width) * 0.5)),
+    calc(100% - var(--border-width)) var(--border-width),
+     calc(100% - var(--border-width)) var(--border-width),
+    calc(100% - var(--border-width))
+      calc(100% - calc(var(--curve-size) + var(--border-width) * 0.5)),
+      calc(100% - calc(var(--curve-size) + var(--border-width) * 0.5))
+      calc(100% - var(--border-width)),
+      calc(100% - calc(var(--curve-size) + var(--border-width) * 0.5))
+      calc(100% - var(--border-width))
+  );
+  transition: 200ms;
+}
+
+.btn:where(:hover, :focus) {
+  color: #fff;
+}
+
+        .info-section {
+            color: white;
+            border: 3px solid #05cff3; 
+    border-radius: 15px;
+            background: rgb(12, 12, 12);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .info-section h2 {
+            margin-bottom: 10px;
+        }
+        .info-section p {
+            margin: 5px 0;
+        }
+        .info-section a {
+            color: #0157f8;
+            text-decoration: none;
+        }
+        .info-section a:hover {
+            text-decoration: underline;
+        }
+        .error-message {
+            color: red;
+            font-size: 16px;
+            margin-top: 10px;
+            display: none;
+            text-align: center;
+        }
+        .success-message {
+            display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #4CAF50;
+        color: white;
+        padding: 15px 25px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        font-size: 18px;
+        text-align: center;
+        z-index: 1000;
+    }
+        
+        @media (max-width: 768px) {
+            body {
+                background-color: #002b5c; 
+            }
+
+            .container {
+                flex-direction: column;
+                padding: 20px;
+                border: none; 
+                box-shadow: none; 
+            }
+
+            .image-section {
+                display: none; 
+            }
+
+            .form-section {
+                width: 100%;
+                padding: 10px;
+                background-color: #002b5c; 
+                border: 3px solid #05cff3; 
+                border-radius: 15px;
+            }
+
+            .form-section h2 {
+                font-size: 18px; 
+                margin-bottom: 10px;
+            }
+
+            .form-group input,
+            .form-group textarea {
+                width: 100%; 
+            }
+
+            .info-section {
+                margin-top: 20px;
+                padding: 10px;
+            }
+
+            .info-section h2 {
+                font-size: 16px; 
+            }
+
+            .info-section p {
+                font-size: 14px; 
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="image-section"></div>
+        <div class="form-section">
+            <h2>Форма за контакт</h2>
+            <form id="contact-form" action="contact.php" method="post">
+                <div class="form-group">
+                    <label for="name">Име:</label>
+                    <input type="text" id="name" name="name">
+                </div>
+                <div class="form-group">
+                    <label for="email">Имейл:</label>
+                    <input type="email" id="email" name="email">
+                </div>
+                <div class="form-group">
+                    <label for="subject">Тема:</label>
+                    <input type="text" id="subject" name="subject">
+                </div>
+                <div class="form-group">
+                    <label for="message">Съобщение:</label>
+                    <textarea id="message" name="message"></textarea>
+                </div>
+                <button type="submit" class="btn">Изпрати</button>
+                <p id="form-error" class="error-message">Моля, попълнете всички полета.</p>
+            </form>
+            <div class="info-section">
+                <h2>Свържи се със нас</h2>
+                <p><i class="fas fa-phone-alt"></i> +359 89 4248054</p>
+                <p><i class="fas fa-envelope"></i> <a href="mailto:syuleyman88ilker@gmail.com">syuleyman88ilker@gmail.com</a></p>
+                <p><i class="fas fa-map-marker-alt"></i> ul.Gimnaziya V.LEVSKI Isperih </p>
+            </div>
+        </div>
+    </div>
+    
+    
+    <div id="success-message" class="success-message">Съобщението е изпратено успешно!</div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('contact-form');
+    const successMessage = document.getElementById('success-message');
+    const errorMessage = document.getElementById('form-error');
+
+    form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const formData = new FormData(form);
+
+        
+        let isValid = true;
+        form.querySelectorAll('input, textarea').forEach((input) => {
+            if (!input.value.trim()) {
+                isValid = false;
+            }
+        });
+
+        if (!isValid) {
+            errorMessage.style.display = 'block'; 
+            successMessage.style.display = 'none'; 
+            return;
+        } else {
+            errorMessage.style.display = 'none'; 
+        }
+
+        try {
+            const response = await fetch('contact.php', {
+                method: 'POST',
+                body: formData,
+            });
+
+            const result = await response.json();
+
+            if (result.status === 'success') {
+                history.replaceState(null, '', 'index.html');
+                successMessage.style.display = 'block';
+                setTimeout(() => {
+                    successMessage.style.display = 'none'; 
+                    form.reset(); 
+                }, 3000); 
+            } else {
+                console.error(result.message); 
+            }
+        } catch (error) {
+            console.error('Възникна грешка при изпращане на съобщението:', error);
+        }
+    });
+});
+
+
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>направете поръчка</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #121212;
+            color: #e0e0e0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            width: 90%;
+            max-width: 800px;
+            margin: auto;
+            background: #1e1e1e;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+        #main-header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 3px solid #bb86fc;
+        }
+        #main-header h1 {
+            margin: 0;
+            font-size: 24px;
+            text-transform: uppercase;
+        }
+        #cart-items {
+            padding: 20px;
+        }
+        .cart-item {
+            background: #2c2c2c;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .cart-item p {
+            margin: 0;
+        }
+        .order-form {
+            padding: 20px;
+            background: #2c2c2c;
+            border-top: 1px solid #444;
+        }
+        .order-form input, .order-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #444;
+            border-radius: 5px;
+            background: #333;
+            color: #ffffff;
+        }
+        .order-form button {
+            width: 100%;
+            padding: 15px;
+            background: #bb86fc;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s;
+        }
+        .order-form button:hover {
+            background: #9a67ea;
+        }
+        #confirmation-message {
+            display: none;
+            background: #4CAF50;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            margin-top: 20px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header id="main-header">
+            <h1>направете поръчка</h1>
+        </header>
+        <div id="cart-items">
+        </div>
+        <div class="order-form">
+            <h2>Информация за поръчка</h2>
+            <form id="order-form">
+                <label for="name">Име Фамилия:</label>
+                <input type="text" id="name" name="name" required>
+                
+                <label for="address">адрес:</label>
+                <textarea id="address" name="address" rows="4" required></textarea>
+                
+                <label for="phone">Телефонен номер:</label>
+                <input type="tel" id="phone" name="phone" required>
+                
+                <label for="email">Имейл:</label>
+                <input type="email" id="email" name="email" required>
+                
+                <button type="submit">Изпратете поръчка</button>
+            </form>
+        </div>
+        <div id="confirmation-message">Вашата поръчка е получена успешно!</div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('get_cart.php')
+                .then(response => response.text())
+                .then(text => {
+                    try {
+                        const data = JSON.parse(text);
+                        if (data.success) {
+                            const cartItemsDiv = document.getElementById('cart-items');
+                            let totalPrice = 0;
+                            data.cart_items.forEach(item => {
+                                const itemDiv = document.createElement('div');
+                                itemDiv.className = 'cart-item';
+                                const itemTotalPrice = item.price * item.quantity;
+                                totalPrice += itemTotalPrice;
+                                itemDiv.innerHTML = `
+                                    <p>Име: ${item.product_name}</p>
+                                    <p>Цена: ${item.price} лв</p>
+                                    <p>Брой: <input type="number" class="item-quantity" value="${item.quantity}" min="1" data-price="${item.price}"></p>
+                                    <p>Обща цена: <span class="item-total-price">${itemTotalPrice}</span> лв</p>
+                                    <button class="remove-item">Изтриване</button>
+                                `;
+                                cartItemsDiv.appendChild(itemDiv);
+                            });
+                            const totalDiv = document.createElement('div');
+                            totalDiv.className = 'cart-total';
+                            totalDiv.innerHTML = `<p>Обща сума: <span id="total-price">${totalPrice}</span> лв</p>`;
+                            cartItemsDiv.appendChild(totalDiv);
+
+                            // Miktar değiştiğinde toplam fiyatı güncelle
+                            document.querySelectorAll('.item-quantity').forEach(input => {
+                                input.addEventListener('change', function() {
+                                    const quantity = parseInt(this.value);
+                                    const price = parseFloat(this.getAttribute('data-price'));
+                                    const itemTotalPrice = quantity * price;
+                                    this.parentElement.nextElementSibling.querySelector('.item-total-price').textContent = itemTotalPrice.toFixed(2);
+
+                                    updateTotalPrice();
+                                });
+                            });
+
+                            // Ürünü sepetten sil
+                            document.querySelectorAll('.remove-item').forEach(button => {
+                                button.addEventListener('click', function() {
+                                    this.parentElement.remove();
+                                    updateTotalPrice();
+                                });
+                            });
+
+                            function updateTotalPrice() {
+                                let newTotalPrice = 0;
+                                document.querySelectorAll('.item-total-price').forEach(span => {
+                                    newTotalPrice += parseFloat(span.textContent);
+                                });
+                                document.getElementById('total-price').textContent = newTotalPrice.toFixed(2);
+                            }
+                        } else {
+                            console.error('Не можах да извлека артикулите от количката:', data.message);
+                        }
+                    } catch (error) {
+                        console.error('Грешка при анализа на JSON:', error);
+                        console.error('Отговор на сървъра:', text);
+                    }
+                })
+                .catch(error => console.error('грешка:', error));
+        });
+
+        document.getElementById('order-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const formData = new FormData(event.target);
+            const cartItems = [];
+            let totalPrice = 0;
+
+            document.querySelectorAll('.cart-item').forEach(item => {
+                const productName = item.querySelector('p:nth-child(1)').textContent.split(': ')[1];
+                const price = item.querySelector('p:nth-child(2)').textContent.split(': ')[1].replace(' лв', '');
+                const quantity = item.querySelector('.item-quantity').value;
+                const itemTotalPrice = parseFloat(price) * parseInt(quantity);
+                totalPrice += itemTotalPrice;
+
+                cartItems.push({ product_name: productName, price: parseFloat(price), quantity: parseInt(quantity) });
+            });
+
+            formData.append('cart_items', JSON.stringify(cartItems));
+            formData.append('total_price', totalPrice);
+
+            fetch('submit_order.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(text => {
+                try {
+                    const data = JSON.parse(text);
+                    if (data.success) {
+                        const confirmationMessage = document.getElementById('confirmation-message');
+                        confirmationMessage.style.display = 'block';
+                        setTimeout(() => {
+                            confirmationMessage.style.display = 'none';
+                            window.location.href = 'index.html';
+                        }, 3000);
+                    } else {
+                        alert('Възникна грешка при изпращане на поръчката: ' + data.message);
+                    }
+                } catch (error) {
+                    console.error('Грешка при анализа на JSON:', error);
+                    console.error('Отговор на сървъра:', text);
+                }
+            })
+            .catch(error => console.error('грешка:', error));
+        });
+    </script>
+</body>
+</html>
