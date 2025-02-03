@@ -2,7 +2,7 @@
 session_start();
 header('Content-Type: application/json');
 
-// admin_panel.php ve admin_handler.php için kontrol
+
 function checkAdminSession() {
     foreach($_SESSION as $key => $value) {
         if(strpos($key, 'admin_') === 0 && isset($value['role']) && $value['role'] === 'admin') {
@@ -24,7 +24,7 @@ if ($conn->connect_error) {
     exit();
 }
 
-// Променете начина на получаване на action параметъра
+
 $action = '';
 if (isset($_GET['action'])) {
     $action = $_GET['action'];
@@ -32,7 +32,7 @@ if (isset($_GET['action'])) {
     $action = $_POST['action'];
 }
 
-// Добавете debug logging
+
 error_log("Received action: " . $action);
 error_log("POST data: " . print_r($_POST, true));
 error_log("FILES data: " . print_r($_FILES, true));
@@ -76,7 +76,7 @@ switch($action) {
         $email = $_POST['email'];
         $role = $_POST['role'];
         
-        // Validate role
+        
         if (!in_array($role, ['user', 'admin'])) {
             echo json_encode(['success' => false, 'message' => 'Invalid role']);
             break;
@@ -182,12 +182,12 @@ switch($action) {
             $description = $conn->real_escape_string($_POST['description']);
             $category = $conn->real_escape_string($_POST['category']);
             
-            // Başlangıç SQL sorgusu
+            
             $sql = "UPDATE products SET name = ?, price = ?, description = ?, category = ?";
-            $types = "sdss"; // string, double, string, string
+            $types = "sdss"; 
             $params = array($name, $price, $description, $category);
             
-            // Eğer yeni resim yüklendiyse
+            
             if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
                 $target_dir = "uploads/";
                 $target_file = $target_dir . time() . '_' . basename($_FILES['image']['name']);
@@ -197,7 +197,7 @@ switch($action) {
                     $types .= "s";
                     $params[] = $target_file;
                     
-                    // Eski resmi sil
+                    
                     $old_image = $conn->query("SELECT image_path FROM products WHERE id = $product_id")->fetch_assoc();
                     if ($old_image && file_exists($old_image['image_path'])) {
                         unlink($old_image['image_path']);
@@ -219,7 +219,7 @@ switch($action) {
                     'product_id' => $product_id
                 ]);
                 
-                // Önbelleği temizle
+                
                 if (file_exists('product_cache.json')) {
                     unlink('product_cache.json');
                 }
