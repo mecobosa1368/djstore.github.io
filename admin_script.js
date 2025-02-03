@@ -200,7 +200,7 @@ function showOrderDetails(orderId) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Navigasyon işlemleri
+    
     document.querySelectorAll('.nav-link').forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
@@ -209,11 +209,11 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // İlk yükleme ve periyodik güncelleme
+    
     updateStatistics();
     setInterval(updateStatistics, 30000);
 
-    // Tarih filtrelerini ayarla
+    
     const startDateInput = document.getElementById('startDate');
     const endDateInput = document.getElementById('endDate');
     
@@ -273,7 +273,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Edit product form handler - null check ekleyelim
+    
     const editProductForm = document.getElementById('editProductForm');
     if (editProductForm) {
         editProductForm.addEventListener('submit', function(e) {
@@ -289,21 +289,21 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    // Ürünleri yeniden yükle
+                    
                     fetch('get_products.php')
                         .then(response => response.json())
                         .then(products => {
-                            // LocalStorage'i güncelle
+                            
                             localStorage.setItem('products', JSON.stringify(products));
                             
-                            // Ana sayfayı yenile (eğer açıksa)
+                            
                             if (window.opener && !window.opener.closed) {
                                 window.opener.postMessage('refreshProducts', '*');
                             }
                             
                             alert(data.message);
                             document.getElementById('editProductModal').style.display = 'none';
-                            location.reload(); // Admin panelini yenile
+                            location.reload(); 
                         })
                         .catch(error => {
                             console.error('Грешка при извличане на продукти:', error);
@@ -318,7 +318,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     checkSession();
-    // fetchCart(); // Bu satırı kaldırıyoruz çünkü admin panelde sepet yok
+    
 });
 
 function editProduct(productId) {
@@ -328,20 +328,20 @@ function editProduct(productId) {
             if (data.success) {
                 const product = data.product;
                 
-                // Form alanlarını doldur
+               
                 document.getElementById('edit_product_id').value = product.id;
                 document.getElementById('edit_product_name').value = product.name;
                 document.getElementById('edit_product_price').value = product.price;
                 document.getElementById('edit_product_description').value = product.description;
                 document.getElementById('edit_product_category').value = product.category;
                 
-                // Mevcut resmi göster
+                
                 const currentImage = document.getElementById('current_product_image');
                 if (currentImage) {
                     currentImage.src = product.image_path;
                 }
                 
-                // Modalı göster
+               
                 document.getElementById('editProductModal').style.display = 'block';
             } else {
                 alert('Грешка при инсталирането на продукта: ' + data.message);
@@ -352,17 +352,17 @@ function editProduct(productId) {
             alert('Възникна грешка при инсталирането на продукта');
         });
 }
-// Modal kapatma fonksiyonu
+
 function closeModal() {
     document.getElementById('editProductModal').style.display = 'none';
 }
 
-// Event listener'ları ekle
+
 document.addEventListener('DOMContentLoaded', function() {
-    // X işaretine tıklama
+    
     document.querySelector('.close').addEventListener('click', closeModal);
 
-    // Modal dışına tıklama
+    
     window.addEventListener('click', function(event) {
         if (event.target == document.getElementById('editProductModal')) {
             closeModal();
